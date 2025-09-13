@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Event Registration Website | Arjun Das Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-purple: #6a0dad;
+            --primary-blue: #0077be;
+            --dark-bg: #000000;
+            --card-bg: #02010a;
+            --text-primary: #E5E7EB;
+            --text-secondary: #9CA3AF;
+            --glass-bg: rgba(10, 5, 20, 0.1);
+            --glass-border: rgba(173, 216, 230, 0.2);
+            --neon-glow: rgba(0, 225, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        html::-webkit-scrollbar {
+            background-color: #09001fae;
+            width: 12px;
+            border-radius: 10px;
+        }
+        
+        html::-webkit-scrollbar-track {
+            border-radius: 10px;
+            box-shadow: inset 0 0 6px rgba(23, 0, 73, 0.3);
+        }
+        
+        html::-webkit-scrollbar-thumb {
+            background-image: -webkit-gradient(linear, left bottom, left top, color-stop(.5, #480379), color-stop(1, #001a84));
+            border-radius: 10px;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Project Header */
+        .project-header {
+            padding: 100px 0 50px;
+            text-align: center;
+        }
+
+        .project-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(-45deg, var(--primary-purple), var(--primary-blue), #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-animation 15s ease infinite;
+        }
+        
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(-45deg, var(--primary-purple), var(--primary-blue));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 119, 190, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--glass-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+        
+        .project-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Main Content Section */
+        .project-content {
+            padding: 50px 0;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .project-image, .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .demo-video {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .demo-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .project-image img, .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(550px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            margin: 40px 0 20px;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .tech-item {
+            display: flex;
+            align-items: center;
+            background-color: rgba(106, 13, 173, 0.2);
+            color: var(--text-secondary);
+            border: 1px solid var(--primary-purple);
+            padding: 8px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .tech-item i {
+            margin-right: 10px;
+            color: var(--primary-purple);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .feature-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 50px;
+            background-color: var(--card-bg);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        /* For devices with a max-width of 700px */
+@media (max-width: 700px) {
+    .project-header {
+        padding: 80px 15px 40px 15px;
+    }
+
+    .project-title {
+        font-size: 2.8rem;
+    }
+
+    .project-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .project-links {
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 10px 25px;
+        font-size: 0.95rem;
+    }
+
+    .project-content {
+        padding: 30px 0;
+    }
+
+    .glass-card {
+        padding: 30px 20px;
+    }
+    
+    .project-image img, .gallery-item img {
+        width: 100%;
+    }
+
+    .image-gallery {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .tech-stack {
+        gap: 10px;
+    }
+
+    .tech-item {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .feature-card {
+        padding: 20px;
+    }
+
+    .feature-title {
+        font-size: 1.2rem;
+    }
+
+    .feature-list li {
+        font-size: 1rem;
+    }
+
+    footer {
+        padding: 30px 20px;
+        margin-top: 30px;
+    }
+}
+
+/* For devices with a max-width of 500px */
+@media (max-width: 500px) {
+    .project-header {
+        padding: 60px 10px 30px 10px;
+    }
+
+    .project-title {
+        font-size: 2.2rem;
+    }
+
+    .project-subtitle {
+        font-size: 1rem;
+    }
+
+    .project-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .glass-card {
+        padding: 25px 15px;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .feature-title {
+        font-size: 1.1rem;
+    }
+
+    .feature-list li {
+        font-size: 0.95rem;
+    }
+}
+
+
+    </style>
+     <link rel="stylesheet" href="responsive-event.css">
+</head>
+<body>
+    <svg id="background-animation" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+        <defs>
+            <linearGradient id="polygon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#000071"><animate attributeName="stop-color" values="#000071; #690069; #000071" dur="10s" repeatCount="indefinite"></animate></stop>
+                <stop offset="100%" stop-color="#690069"><animate attributeName="stop-color" values="#690069; #000071; #690069" dur="10s" repeatCount="indefinite"></animate></stop>
+            </linearGradient>
+            <pattern id="polygon-pattern" patternUnits="userSpaceOnUse" width="120" height="140" patternTransform="scale(1.5)">
+                <g stroke="rgba(255, 255, 255, 0.05)" stroke-width="1">
+                    <path d="M120 35 L120 105 L60 140 L60 70 Z" fill="black"></path>
+                    <path d="M0 35 L60 70 L60 140 L0 105 Z" fill="url(#polygon-gradient)"></path>
+                    <path d="M60 0 L120 35 L60 70 L0 35 Z" fill="url(#polygon-gradient)" opacity="0.6"></path>
+                </g>
+            </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="#000000"></rect>
+        <rect width="100%" height="100%" fill="url(#polygon-pattern)"></rect>
+    </svg>
+
+    <!-- Project Header -->
+    <section class="project-header">
+        <div class="container">
+            <h1 class="project-title">College Event Registration Website</h1>
+            <p class="project-subtitle">A comprehensive web application for managing event registrations for college events, built with Flask, HTML, CSS, and JavaScript to streamline the process of organizing and participating in college activities.</p>
+            <div class="project-links">
+                <a href="http://tjeevents.pythonanywhere.com/" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="../index.html#projects" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+        <div class="container">
+            <div class="glass-card">
+                <div class="project-image">
+                    <img src="../images/event.png" alt="Event Registration Website Screenshot">
+                </div>
+                
+                <h2 class="section-title">Project Overview</h2>
+                <p>The College Event Registration Website is a comprehensive web application designed to streamline the process of managing event registrations in a college setting. Built with Flask and modern web technologies, this platform provides a centralized solution for event organizers to create, manage, and promote events, while offering students a seamless, one-tap way to register for activities after creating an account.</p>
+                <br>
+                <p>This project was developed to address the challenges faced by college event organizers, who often deal with cumbersome registration forms and manual data entry. This platform eliminates forms entirely, allowing admins to post event details using simple Markdown and students to register instantly, aiming to increase participation and reduce administrative burden.</p>
+                
+                <h2 class="section-title">Technology Stack</h2>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <i class="fab fa-python"></i>
+                        <span>Flask</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-database"></i>
+                        <span>SQLite</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-html5"></i>
+                        <span>HTML5</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-css3-alt"></i>
+                        <span>CSS3</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-js-square"></i>
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email Integration</span>
+                    </div>
+                </div>
+                
+                <h2 class="section-title">Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3 class="feature-title">User Accounts & One-Tap Registration</h3>
+                        <ul class="feature-list">
+                            <li>Simple user account creation</li>
+                            <li>Register for events with a single click</li>
+                            <li>View event details before registering</li>
+                            <li>Track registered events in user profile</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3 class="feature-title">Submission Handling</h3>
+                        <ul class="feature-list">
+                            <li>Accept file uploads for competitions</li>
+                            <li>Allow submission of external links (e.g., GitHub)</li>
+                            <li>Organized submission tracking for admins</li>
+                            <li>Set deadlines for submissions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3 class="feature-title">Automated Certification</h3>
+                        <ul class="feature-list">
+                            <li>Automatic certificate generation for participants</li>
+                            <li>Requires admin approval for issuance</li>
+                            <li>Customizable certificate templates</li>
+                            <li>Reduces manual work for organizers</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3 class="feature-title">Admin Dashboard</h3>
+                        <ul class="feature-list">
+                            <li>Comprehensive event analytics</li>
+                            <li>View and manage all registrations</li>
+                            <li>Approve submissions and trigger certificates</li>
+                            <li>User management and permissions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3 class="feature-title">Event Management</h3>
+                        <ul class="feature-list">
+                            <li>Create and customize event listings</li>
+                            <li>Use Markdown for rich text event details</li>
+                            <li>Set registration limits and waitlists</li>
+                            <li>Upload event-specific images and details</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3 class="feature-title">Mobile Responsive</h3>
+                        <ul class="feature-list">
+                            <li>Fully responsive design for all devices</li>
+                            <li>Optimized for a seamless mobile experience</li>
+                            <li>Touch-friendly interface</li>
+                            <li>Fast loading on mobile networks</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h2 class="section-title">Development Process</h2>
+                <p>The development of the College Event Registration Website began with extensive research into the needs of college event organizers and participants. The goal was to create a solution that would be both powerful and easy to use, catering to users with varying levels of technical expertise.</p>
+                <br>
+                <p>Flask was chosen as the backend framework for its simplicity and flexibility, allowing for rapid development and easy integration with various Python libraries. The frontend was built with standard web technologies to ensure compatibility and ease of maintenance.</p>
+                <br>
+                <p>One of the key challenges was designing a user experience that removed the friction of traditional forms. The core challenge was building a secure one-tap registration system linked to user accounts. This involved creating separate dashboards with appropriate functionalities for each user type, while maintaining a consistent design language throughout the application.</p>
+                <br>
+                <p>Another key feature was implementing a Markdown parser for the admin panel, allowing organizers to easily format event details without needing HTML knowledge. This empowered admins to create rich, detailed event pages quickly.</p>
+                
+                <h2 class="section-title">Screenshots</h2>
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="../images/event (1).png" alt="Event Listings Page">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/event (2).png" alt="Event Details Page">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../images/event (3).png" alt="Registration Form">
+                    </div>
+                    
+                </div>
+                
+                <h2 class="section-title">Live Demo</h2>
+                <div class="demo-video">
+                    <iframe src="http://tjeevents.pythonanywhere.com/" frameborder="0" allowfullscreen></iframe>
+                </div>
+                
+                <h2 class="section-title">Impact and Results</h2>
+                <p>The College Event Registration Website has significantly improved the efficiency of event management at the college. Organizers have reported a drastic reduction in administrative workload, especially by eliminating form management. The one-tap registration has significantly boosted student participation by making it incredibly fast and easy to sign up for events.</p>
+                <br>
+                <p>The platform's focus on the specific needs of college events, such as team registrations and submission handling, has made it a highly effective tool for both students and staff, leading to a more vibrant campus life.</p>
+                <br>
+                <p>Future enhancements planned for the application include integration with social media platforms for event promotion, advanced analytics and reporting features, and a mobile application for on-the-go event management and registration.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="../index.html#projects" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+            <p>&copy; 2025 Arjun Das. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
