@@ -406,6 +406,24 @@
     .feature-list li {
         font-size: 0.95rem;
     }
+    .demo-video {
+    position: relative;
+    padding-bottom: 177.77%; /* 9:16 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    border: 1px solid var(--glass-border);
+}
+
+.demo-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
 }
 
     </style>
@@ -605,4 +623,5 @@
     </footer>
 </body>
 </html>
+
 
